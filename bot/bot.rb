@@ -13,7 +13,17 @@ class Bot < SlackRubyBot::Bot
 
   command 'spiderman' do |client, data, match|
     spidey_results = @marvel_client.character('Spider-Man')
-    # client.say(text: "#{spidey_results[:results][:thumbnail][:path]}.#{spidey_results[:results][:thumbnail]}", channel: data.channel)
     client.say(text: "#{spidey_results[:data][:results][0][:thumbnail][:path]}.#{spidey_results[:data][:results][0][:thumbnail][:extension]}", channel: data.channel)
   end
+
+  command 'character' do |client, data, match|
+    results = @marvel_client.character(match['expression'])
+    client.say(text: "#{results[:data][:results][0][:thumbnail][:path]}.#{results[:data][:results][0][:thumbnail][:extension]}", channel: data.channel)
+  end
+
+  # Make a class that stores what a person is reading
+  # So let's say a comic
+  # maybe an occurrence
+  # a command here for "reading" - aliased to several other expresssions
+  # "@marvelbot I'm reading/I've been reading/I read [spiderman]"
 end
