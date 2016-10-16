@@ -58,3 +58,8 @@ group :development do
   gem 'spring'
 end
 
+# For Heroku
+gem 'rails_12factor', group: :production
+
+# Marvel API wrapper gem
+gem 'marvelite'
